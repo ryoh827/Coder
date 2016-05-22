@@ -52,3 +52,12 @@ class IO
         echo $str . PHP_EOL;
     }
 }
+
+$io = new IO();
+
+$h = $io->nextInt();
+$w = $io->nextInt();
+
+$ans = ($h - 1) * $w + $h * ($w - 1);
+
+$io->out($ans);

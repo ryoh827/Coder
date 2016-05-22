@@ -52,3 +52,22 @@ class IO
         echo $str . PHP_EOL;
     }
 }
+
+$io = new IO();
+$inputs = [];
+for ($i = 0; $i < 3; $i++) {
+    $inputs[] = $io->nextInt();
+}
+//小さい方を取得
+$use = $inputs[0] < $inputs[1] ? $inputs[0] : $inputs[1];
+$cnt = 0;
+while (true) {
+    if ($inputs[2] - $use >= 0) {
+        $inputs[2] -= $use;
+        $cnt++;
+    } else {
+        break;
+    }
+}
+
+$io->out($cnt);

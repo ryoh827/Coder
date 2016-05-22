@@ -52,3 +52,36 @@ class IO
         echo $str . PHP_EOL;
     }
 }
+
+$io = new IO();
+$list = [];
+$str = $io->next();
+//文字列の分解
+for($i = 0; $i < strlen($str); $i++) {
+    $list[$str[$i]]++;
+}
+$oddlist = [];
+$evenlist = [];
+$evenCharCnt = 0;
+
+foreach ($list as $char => $cnt) {
+    if ($cnt == 1) {
+        $oddlist[$char] = $cnt;
+    } else if ($cnt % 2 == 1) {
+        $oddlist[$char] = $cnt;
+        $evenCharCnt += $cnt - 1;
+    } else {
+        $evenlist[$char] = $cnt;
+        $evenCharCnt += $cnt;
+    }
+}
+
+$oddcnt = count($oddlist);
+
+if ($oddcnt <= 0) {
+    $io->out(strlen($str));
+} else {
+    $tmp = (int)(($evenCharCnt / $oddcnt) / 2);
+    $ans = $tmp * 2 + 1;
+    $io->out($ans);
+}

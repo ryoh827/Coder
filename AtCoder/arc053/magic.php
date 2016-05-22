@@ -52,3 +52,40 @@ class IO
         echo $str . PHP_EOL;
     }
 }
+
+$io = new IO();
+
+$n = $io->nextInt();
+$list = []; //  a, b
+$tmplist = [];
+for ($i = 0; $i < $n; $i++) {
+    $a = $io->nextInt();
+    $b = $io->nextInt();
+    $list[$i] =[$a, $b]; // a => b
+    $tmplist[$a][$i] = $a - $b;
+}
+//sort
+foreach ($tmplist as $v) {
+    krsort($v);
+}
+asort($tmplist);
+
+var_dump($tmplist);
+
+$tmp = 0;
+$max = 0;
+
+if (count($list) <= 1) {
+    $max = $list[0][0];
+} else {
+    foreach ($tmplist as $k => $v) {
+        $tmp += $list[$k][0];
+        if ($max < $tmp) {
+            $max = $tmp;
+        }
+        $tmp -= $list[$k][1];
+    }
+}
+
+$io->out($max);
+
