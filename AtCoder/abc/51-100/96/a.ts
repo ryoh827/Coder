@@ -1,6 +1,6 @@
 namespace sample {
   class Scanner {
-    private buffer: string = '';
+    private buffer = '';
     private stdinQueue: any = [];
 
     constructor() {
@@ -48,6 +48,12 @@ namespace sample {
 
   async function slove() {
     const sc = new Scanner();
+    const [a, b]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
+    if (a > b) {
+      console.log(a - 1);
+    } else {
+      console.log(a);
+    }
     sc.close();
   }
 

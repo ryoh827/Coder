@@ -1,6 +1,8 @@
+import { getMaxListeners } from 'cluster';
+
 namespace sample {
   class Scanner {
-    private buffer: string = '';
+    private buffer = '';
     private stdinQueue: any = [];
 
     constructor() {
@@ -48,6 +50,15 @@ namespace sample {
 
   async function slove() {
     const sc = new Scanner();
+    const [A, B, C] = (await sc.getLine()).split(' ').map((x) => +x);
+    const K = +(await sc.getLine());
+    let maxNum = Math.max(A, B, C);
+    let ans = A + B + C - maxNum;
+    for (let i = 0; i < K; i++) {
+      maxNum *= 2;
+    }
+    ans += maxNum;
+    console.log(ans);
     sc.close();
   }
 
