@@ -1,7 +1,6 @@
 class Scanner {
   private buffer = '';
   private stdinQueue: any = [];
-  private lineBuffer = '';
 
   constructor() {
     process.stdin.resume();
