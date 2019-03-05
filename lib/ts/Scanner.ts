@@ -1,4 +1,4 @@
-namespace sample {
+namespace Coder {
   class Scanner {
     private buffer: string = '';
     private stdinQueue: any = [];
@@ -28,7 +28,7 @@ namespace sample {
     public getLine(): Promise<string> {
       return new Promise((resolve, reject) => {
         const i = this.buffer.indexOf('\n');
-        if (i >= 0 && this.stdinQueue.length == 0) {
+        if (i >= 0 && this.stdinQueue.length === 0) {
           let line = this.buffer.substr(0, i);
           if (line.endsWith('\r')) {
             line = line.slice(0, -1);

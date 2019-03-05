@@ -1,6 +1,8 @@
-namespace sample {
+import { INSPECT_MAX_BYTES } from 'buffer';
+
+namespace Coder {
   class Scanner {
-    private buffer = '';
+    private buffer: string = '';
     private stdinQueue: any = [];
 
     constructor() {
@@ -48,15 +50,27 @@ namespace sample {
 
   async function slove() {
     const sc = new Scanner();
-    const [A, B, C] = (await sc.getLine()).split(' ').map((x) => +x);
-    const K = +(await sc.getLine());
-    let maxNum = Math.max(A, B, C);
-    let ans = A + B + C - maxNum;
-    for (let i = 0; i < K; i++) {
-      maxNum *= 2;
+    const [N, M] = (await sc.getLine()).split(' ').map((x) => +x);
+    const A = (await sc.getLine()).split(' ').map((x) => +x);
+
+    const need = [2, 5, 5, 4, 5, 6, 3, 7, 6];
+    A.sort((a, b) => need[a - 1] - need[b - 1]);
+
+    dfs(N, A, []);
+
+    let n = N;
+    const ans = [];
+    for (const v of A) {
+      while (true) {
+        const m = need[v - 1];
+        const t = n - m;
+        if (t !== 0 && t - m < 0) break;
+        //console.log(v, t);
+        ans.push(v);
+        n = t;
+      }
     }
-    ans += maxNum;
-    console.log(ans);
+    console.log(ans.join(''));
     sc.close();
   }
 

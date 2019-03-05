@@ -1,6 +1,8 @@
-namespace sample {
+import { mkdirSync } from 'fs';
+
+namespace Coder {
   class Scanner {
-    private buffer = '';
+    private buffer: string = '';
     private stdinQueue: any = [];
 
     constructor() {
@@ -46,17 +48,20 @@ namespace sample {
     }
   }
 
+  const checkFlag = (f: any) => {
+    return f['A'] && f['B'] && f['C'];
+  };
+
   async function slove() {
     const sc = new Scanner();
-    const [A, B, C] = (await sc.getLine()).split(' ').map((x) => +x);
-    const K = +(await sc.getLine());
-    let maxNum = Math.max(A, B, C);
-    let ans = A + B + C - maxNum;
-    for (let i = 0; i < K; i++) {
-      maxNum *= 2;
+    const [N, A, B, C]: number[] = (await sc.getLine())
+      .split(' ')
+      .map((x) => +x);
+    const l: number[] = [];
+    const f: any = { A: false, B: false, C: false };
+    for (let i = 0; i < N; i++) {
+      l.push(+(await sc.getLine()));
     }
-    ans += maxNum;
-    console.log(ans);
     sc.close();
   }
 

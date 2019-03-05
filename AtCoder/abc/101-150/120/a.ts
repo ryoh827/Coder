@@ -1,6 +1,6 @@
-namespace sample {
+namespace Coder {
   class Scanner {
-    private buffer = '';
+    private buffer: string = '';
     private stdinQueue: any = [];
 
     constructor() {
@@ -28,7 +28,7 @@ namespace sample {
     public getLine(): Promise<string> {
       return new Promise((resolve, reject) => {
         const i = this.buffer.indexOf('\n');
-        if (i >= 0 && this.stdinQueue.length == 0) {
+        if (i >= 0 && this.stdinQueue.length === 0) {
           let line = this.buffer.substr(0, i);
           if (line.endsWith('\r')) {
             line = line.slice(0, -1);
@@ -45,20 +45,11 @@ namespace sample {
       process.stdin.pause();
     }
   }
-
-  async function slove() {
+  async function solve() {
     const sc = new Scanner();
-    const [A, B, C] = (await sc.getLine()).split(' ').map((x) => +x);
-    const K = +(await sc.getLine());
-    let maxNum = Math.max(A, B, C);
-    let ans = A + B + C - maxNum;
-    for (let i = 0; i < K; i++) {
-      maxNum *= 2;
-    }
-    ans += maxNum;
-    console.log(ans);
+
     sc.close();
   }
 
-  slove();
+  solve();
 }

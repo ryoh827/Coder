@@ -1,6 +1,6 @@
-namespace sample {
+namespace Coder {
   class Scanner {
-    private buffer = '';
+    private buffer: string = '';
     private stdinQueue: any = [];
 
     constructor() {
@@ -48,15 +48,22 @@ namespace sample {
 
   async function slove() {
     const sc = new Scanner();
-    const [A, B, C] = (await sc.getLine()).split(' ').map((x) => +x);
-    const K = +(await sc.getLine());
-    let maxNum = Math.max(A, B, C);
-    let ans = A + B + C - maxNum;
-    for (let i = 0; i < K; i++) {
-      maxNum *= 2;
+    const n = +(await sc.getLine());
+    const L = (await sc.getLine()).split(' ').map((x) => +x);
+    L.sort((a, b) => {
+      if (a > b) return 1;
+      else return -1;
+    }).reverse();
+    const sum = (array: any[]) => {
+      return array.reduce((prev, current, i, arr) => {
+        return prev + current;
+      });
+    };
+    if (L[0] >= sum(L) - L[0]) {
+      console.log('No');
+    } else {
+      console.log('Yes');
     }
-    ans += maxNum;
-    console.log(ans);
     sc.close();
   }
 
