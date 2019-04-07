@@ -28,7 +28,7 @@ namespace Coder {
     public getLine(): Promise<string> {
       return new Promise((resolve, reject) => {
         const i = this.buffer.indexOf('\n');
-        if (i >= 0 && this.stdinQueue.length === 0) {
+        if (i >= 0 && this.stdinQueue.length == 0) {
           let line = this.buffer.substr(0, i);
           if (line.endsWith('\r')) {
             line = line.slice(0, -1);
@@ -45,17 +45,30 @@ namespace Coder {
       process.stdin.pause();
     }
   }
-  async function solve() {
+
+  const checkFlag = (f: any) => {
+    return f['A'] && f['B'] && f['C'];
+  };
+
+  async function slove() {
     const sc = new Scanner();
-    const [A, B, C]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
-    const t: number = Math.floor(B / A);
-    if (t >= C) {
-      console.log(C);
-    } else {
-      console.log(t);
+    const input = [];
+    let ans = 'Yay!';
+    for (let i = 0; i < 6; i += 1) {
+      input.push(+(await sc.getLine()));
     }
+    for (let i = 0; i < 5; i += 1) {
+      for (let j = i + 1; j < 5; j += 1) {
+        const d = Math.abs(input[i] - input[j]);
+        if (d > input[5]) {
+          ans = ':(';
+          break;
+        }
+      }
+    }
+    console.log(ans);
     sc.close();
   }
 
-  solve();
+  slove();
 }

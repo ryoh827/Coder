@@ -46,10 +46,10 @@ namespace Coder {
     }
   }
 
-  async function slove() {
+  async function solve() {
     const sc = new Scanner();
     sc.close();
   }
 
-  slove();
+  solve();
 }

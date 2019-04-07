@@ -45,15 +45,11 @@ namespace Coder {
       process.stdin.pause();
     }
   }
+
   async function solve() {
     const sc = new Scanner();
-    const [A, B, C]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
-    const t: number = Math.floor(B / A);
-    if (t >= C) {
-      console.log(C);
-    } else {
-      console.log(t);
-    }
+    const [X, Y]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
+    console.log(Math.max(X, Y));
     sc.close();
   }
 

@@ -45,17 +45,15 @@ namespace Coder {
       process.stdin.pause();
     }
   }
+
   async function solve() {
     const sc = new Scanner();
-    const [A, B, C]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
-    const t: number = Math.floor(B / A);
-    if (t >= C) {
-      console.log(C);
-    } else {
-      console.log(t);
-    }
+    const S: string = await sc.getLine();
+    const c0 = (S.match(/0/g) || []).length;
+    const c1 = (S.match(/1/g) || []).length;
+
+    console.log(Math.min(c0, c1) * 2);
     sc.close();
   }
-
   solve();
 }

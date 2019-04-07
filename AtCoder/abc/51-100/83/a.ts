@@ -45,14 +45,20 @@ namespace Coder {
       process.stdin.pause();
     }
   }
+
   async function solve() {
     const sc = new Scanner();
-    const [A, B, C]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
-    const t: number = Math.floor(B / A);
-    if (t >= C) {
-      console.log(C);
+    const [A, B, C, D]: number[] = (await sc.getLine())
+      .split(' ')
+      .map((x) => +x);
+    const t = A + B;
+    const s = C + D;
+    if (t > s) {
+      console.log('Left');
+    } else if (t === s) {
+      console.log('Balanced');
     } else {
-      console.log(t);
+      console.log('Right');
     }
     sc.close();
   }

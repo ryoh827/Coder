@@ -47,12 +47,17 @@ namespace Coder {
   }
   async function solve() {
     const sc = new Scanner();
-    const [A, B, C]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
-    const t: number = Math.floor(B / A);
-    if (t >= C) {
-      console.log(C);
-    } else {
-      console.log(t);
+    const [A, B, K]: number[] = (await sc.getLine()).split(' ').map((x) => +x);
+    const s = Math.max(A, B);
+    let cnt = K;
+    for (let i = s; i > 0; i -= 1) {
+      if (A % i === 0 && B % i === 0) {
+        cnt -= 1;
+      }
+      if (cnt === 0) {
+        console.log(i);
+        break;
+      }
     }
     sc.close();
   }
