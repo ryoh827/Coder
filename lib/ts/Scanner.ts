@@ -6,24 +6,21 @@ namespace Coder {
     constructor() {
       process.stdin.resume();
       process.stdin.setEncoding('utf8');
-      process.stdin.on(
-        'data',
-        (chunk): void => {
-          this.buffer += chunk;
-          while (this.stdinQueue.length > 0) {
-            const i = this.buffer.indexOf('\n');
-            if (i < 0) {
-              break;
-            }
-            let line = this.buffer.substr(0, i);
-            if (line.endsWith('\r')) {
-              line = line.slice(0, -1);
-            }
-            this.buffer = this.buffer.substr(i + 1);
-            this.stdinQueue.shift()(line);
+      process.stdin.on('data', (chunk): void => {
+        this.buffer += chunk;
+        while (this.stdinQueue.length > 0) {
+          const i = this.buffer.indexOf('\n');
+          if (i < 0) {
+            break;
           }
-        },
-      );
+          let line = this.buffer.substr(0, i);
+          if (line.endsWith('\r')) {
+            line = line.slice(0, -1);
+          }
+          this.buffer = this.buffer.substr(i + 1);
+          this.stdinQueue.shift()(line);
+        }
+      });
     }
     public getLine(): Promise<string> {
       return new Promise((resolve, reject) => {
