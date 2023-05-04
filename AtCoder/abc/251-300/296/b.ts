@@ -1,4 +1,4 @@
-namespace AtCoder {
+namespace AtCoder.abc.abc296.b {
   class Scanner {
     private buffer = '';
     private stdinQueue: any = [];
@@ -58,7 +58,6 @@ namespace AtCoder {
       const idx = line.indexOf('*');
       if (idx >= 0) {
         console.log(table[idx] + (i + 1).toString());
-        return;
       }
     }
 
