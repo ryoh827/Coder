@@ -1,6 +1,12 @@
 import * as readline from 'readline';
 
-const rotate = function (array: number[][]): number[][] {
+/**
+ * Rotate a 2D array 90 degrees clockwise.
+ *
+ * @param {T[][]}
+ * @returns {T[][]}
+ */
+const rotate = function <T>(array: T[][]): T[][] {
   const ROW = array.length;
   const COL = array[0].length;
   const col = COL - 1;
