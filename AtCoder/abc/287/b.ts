@@ -84,7 +84,16 @@ reader.on('line', function (line) {
 
 reader.on('close', function () {
   const [N, M] = lines[0].map(Number);
-  const A = lines[1].map(Number);
-  const B = lines[2].map(Number);
-  const map = new Map<number, number>();
+  const S = lines
+    .slice(1, N + 1)
+    .map((line) => line[0].split('').slice(3).join(''));
+  const map = new Map<string, boolean>();
+  lines.slice(N + 1, N + M + 1).map((line) => map.set(line[0], true));
+  let ans = 0;
+  for (const s of S) {
+    if (map.has(s)) {
+      ans++;
+    }
+  }
+  console.log(ans);
 });

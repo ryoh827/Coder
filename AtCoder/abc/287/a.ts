@@ -83,8 +83,11 @@ reader.on('line', function (line) {
 });
 
 reader.on('close', function () {
-  const [N, M] = lines[0].map(Number);
-  const A = lines[1].map(Number);
-  const B = lines[2].map(Number);
-  const map = new Map<number, number>();
+  const N: number = +lines[0][0];
+  const S = lines.slice(1, N + 1).map((line) => line[0]);
+  if (S.filter((s) => s === 'For').length >= N / 2) {
+    console.log('Yes');
+  } else {
+    console.log('No');
+  }
 });

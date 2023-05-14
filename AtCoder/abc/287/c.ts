@@ -84,7 +84,8 @@ reader.on('line', function (line) {
 
 reader.on('close', function () {
   const [N, M] = lines[0].map(Number);
-  const A = lines[1].map(Number);
-  const B = lines[2].map(Number);
-  const map = new Map<number, number>();
+
+  const vect: number[][] = lines
+    .slice(1, M + 1)
+    .map((line) => line.map(Number));
 });

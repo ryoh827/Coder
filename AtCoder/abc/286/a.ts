@@ -83,8 +83,14 @@ reader.on('line', function (line) {
 });
 
 reader.on('close', function () {
-  const [N, M] = lines[0].map(Number);
+  const [N, P, Q, R, S] = lines[0].map(Number);
   const A = lines[1].map(Number);
-  const B = lines[2].map(Number);
-  const map = new Map<number, number>();
+  const ans = [
+    ...A.slice(0, P - 1),
+    ...A.slice(R - 1, S),
+    ...A.slice(Q, R - 1),
+    ...A.slice(P - 1, Q),
+    ...A.slice(S, N),
+  ];
+  console.log(ans.join(' '));
 });
