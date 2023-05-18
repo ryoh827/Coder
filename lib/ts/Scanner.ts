@@ -1,6 +1,33 @@
 import * as readline from 'readline';
 
 /**
+ * Graph class
+ * @class Graph
+ * @constructor
+ */
+
+class Graph {
+  adjacencyList: Map<number, number[]>;
+
+  constructor() {
+    this.adjacencyList = new Map();
+  }
+
+  addVertex(v: number) {
+    if (!this.adjacencyList.has(v)) {
+      this.adjacencyList.set(v, []);
+    }
+  }
+
+  addEdge(v1: number, v2: number) {
+    this.addVertex(v1);
+    this.addVertex(v2);
+    this.adjacencyList.get(v1).push(v2);
+    this.adjacencyList.get(v2).push(v1);
+  }
+}
+
+/**
  * Rotate a 2D array 90 degrees clockwise.
  *
  * @param {T[][]}

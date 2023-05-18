@@ -1,6 +1,33 @@
 import * as readline from 'readline';
 
 /**
+ * Graph class
+ * @class Graph
+ * @constructor
+ */
+
+class Graph {
+  adjacencyList: Map<number, number[]>;
+
+  constructor() {
+    this.adjacencyList = new Map();
+  }
+
+  addVertex(v: number) {
+    if (!this.adjacencyList.has(v)) {
+      this.adjacencyList.set(v, []);
+    }
+  }
+
+  addEdge(v1: number, v2: number) {
+    this.addVertex(v1);
+    this.addVertex(v2);
+    this.adjacencyList.get(v1).push(v2);
+    this.adjacencyList.get(v2).push(v1);
+  }
+}
+
+/**
  * Rotate a 2D array 90 degrees clockwise.
  *
  * @param {T[][]}
@@ -84,8 +111,42 @@ reader.on('line', function (line) {
 
 reader.on('close', function () {
   const [N, M] = lines[0].map(Number);
+  const graph = new Graph();
+  for (let i = 1; i <= M; i++) {
+    const [a, b] = lines[i].map(Number);
+    graph.addEdge(a, b);
+  }
 
-  const vect: number[][] = lines
-    .slice(1, M + 1)
-    .map((line) => line.map(Number));
+  if (N - 1 !== M) {
+    console.log('No');
+    return;
+  }
+  const visited = new Set<number>();
+  const stack = [1];
+  while (stack.length > 0) {
+    const v = stack.pop();
+    if (!visited.has(v)) {
+      visited.add(v);
+
+      if (graph.adjacencyList.get(v).length > 2) {
+        // 2つの辺がある頂点はパスグラフにならない
+        console.log('No');
+        return;
+      }
+
+      for (const w of graph.adjacencyList.get(v)) {
+        if (!visited.has(w)) {
+          stack.push(w);
+        }
+      }
+    } else {
+      stack.push(v + 1);
+    }
+  }
+
+  if (visited.size === N) {
+    console.log('Yes');
+  } else {
+    console.log('No');
+  }
 });
